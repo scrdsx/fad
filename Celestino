@@ -1,0 +1,539 @@
+local License = "KEYAUTH-hCNbtx-jVHmOZ-MF1WvA-aBCyHc-LtGiqq-t0cg6F" --* Your License to use this script.
+
+print(' KeyAuth Lua Example - https://github.com/mazk5145/')
+local HttpService = game:GetService("HttpService")
+local StarterGui = game:GetService("StarterGui")
+local LuaName = "Lilbaby"
+
+StarterGui:SetCore("SendNotification", {
+	Title = LuaName,
+	Text = "Intializing Authentication...",
+	Duration = 5
+})
+
+--* Configuration *--
+local initialized = false
+local sessionid = ""
+
+
+--* Application Details *--
+Name = "hyperion" --* Application Name
+Ownerid = "pIZcfcgqTd" --* OwnerID
+APPVersion = "1.0"     --* Application Version
+
+local req = game:HttpGet('https://keyauth.win/api/1.1/?name=' .. Name .. '&ownerid=' .. Ownerid .. '&type=init&ver=' .. APPVersion)
+
+if req == "KeyAuth_Invalid" then 
+   print(" Error: Application not found.")
+
+   StarterGui:SetCore("SendNotification", {
+	   Title = LuaName,
+	   Text = " Error: Application not found.",
+	   Duration = 3
+   })
+
+   return false
+end
+
+local data = HttpService:JSONDecode(req)
+
+if data.success == true then
+   initialized = true
+   sessionid = data.sessionid
+   --print(req)
+elseif (data.message == "invalidver") then
+   print(" Error: Wrong application version..")
+
+   StarterGui:SetCore("SendNotification", {
+	   Title = LuaName,
+	   Text = " Error: Wrong application version..",
+	   Duration = 3
+   })
+
+   return false
+else
+   print(" Error: " .. data.message)
+   return false
+end
+
+print("\n\n Licensing... \n")
+local req = game:HttpGet('https://keyauth.win/api/1.1/?name=' .. Name .. '&ownerid=' .. Ownerid .. '&type=license&key=' .. License ..'&ver=' .. APPVersion .. '&sessionid=' .. sessionid)
+local data = HttpService:JSONDecode(req)
+
+
+if data.success == false then 
+    StarterGui:SetCore("SendNotification", {
+	    Title = LuaName,
+	    Text = " Error: " .. data.message,
+	    Duration = 5
+    })
+
+    return false
+end
+
+StarterGui:SetCore("SendNotification", {
+	Title = LuaName,
+	Text = " Successfully Authorized :)",
+	Duration = 5
+})
+
+
+--* Your code here *--
+
+
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+
+game:GetService("VirtualUser"):CaptureController()
+game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+end)
+
+for i,v in pairs(getgc(true)) do
+    if type(v) == "function" and getfenv(v).script == game:GetService("Players").LocalPlayer.PlayerScripts.Code.controllers.antiCheatController then
+        if getinfo(v).name ~= "onStart" then
+for a,b in pairs(getupvalues(v)) do
+if type(b) == "table" then
+    for c,d in pairs(b) do
+        if string.find(tostring(c),"max") then
+            rawset(b,c,math.huge)
+        elseif string.find(tostring(c),"disallowed") then
+            rawset(b,c,{})
+        end
+    end
+end
+end
+end
+end
+end
+local function getplayer(plr)
+    local player = nil
+    for i,v in pairs(game.Players:GetPlayers()) do
+        if string.find(v.Name,plr) or string.find(v.DisplayName,plr) then
+            player = v.Name
+            break
+        end
+    end
+    return player
+    end
+    getfenv().jump = game.Players.LocalPlayer.Character.Humanoid.JumpHeight
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs2"))()
+local example = library:CreateWindow({
+  text = "Emergency Hamburg"
+})
+example:AddDropdown({"Select Bus Driver Type","Rural Bus Driver","City Bus Driver"},function(state) 
+    if state ~= "Select Bus Driver Type" then
+ getfenv().drivertype  = state
+    end
+end)
+example:AddToggle("Auto Farm[Bus]", function(state)
+    getfenv().busman = (state and true or false)
+    spawn(function()
+        while getfenv().busman do
+            task.wait()
+        local p,call = pcall(function()
+            local plr = game.Players.LocalPlayer
+            local car = workspace.Vehicles[plr.Name]
+        if workspace.Vehicles:FindFirstChild(plr.Name) and game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Part") and game.Players.LocalPlayer.Character.Humanoid.SeatPart == nil then
+           
+            local plr = game.Players.LocalPlayer
+            local car = workspace.Vehicles[plr.Name]
+            car.DriveSeat:Sit(game.Players.LocalPlayer.Character.Humanoid)
+        end
+        end)
+        if p == false then
+            warn("Get in vehicle error:",call)
+        end
+        end
+        end)
+        spawn(function()
+            while getfenv().busman do
+                task.wait()
+                pcall(function()
+                if game.Players.LocalPlayer.Character.Humanoid.Health < 60 and game.Players.LocalPlayer.Character.Humanoid.SeatPart == nil then
+        game.Players.LocalPlayer.Character:BreakJoints()
+        warn("Character had to be reset we restarting")
+                end
+            end)
+            end
+        end)
+    while getfenv().busman do
+        wait()
+       local p,call = pcall(function()
+            workspace.Gravity = 196
+            local plr = game.Players.LocalPlayer
+            local car = workspace.Vehicles[plr.Name]
+            if   workspace.Vehicles:FindFirstChild(plr.Name) and not game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Part")  then
+                repeat wait()
+                    workspace.Vehicles:FindFirstChild(game.Players.LocalPlayer.Name).DriveSeat:Sit(game.Players.LocalPlayer.Character.Humanoid)
+                until game.Players.LocalPlayer.Character.Humanoid.SeatPart ~= nil
+                wait()
+                workspace.Vehicles:FindFirstChild(game.Players.LocalPlayer.Name):PivotTo(CFrame.new(-1683.09375, 15.630923271179199, -1286.167236328125))
+                wait(1)
+                game.Players.LocalPlayer.Character.Humanoid.Sit = false
+                wait(2)
+            if game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(-1683.09375, 5.630923271179199, -1286.167236328125)) < 50 then
+                game.Players.LocalPlayer.Character.Humanoid:MoveTo(Vector3.new(-1708.8741455078125, 5.616213321685791, -1281.946044921875))
+                game.Players.LocalPlayer.Character.Humanoid.MoveToFinished:wait()
+                game.Players.LocalPlayer.Character.Humanoid:MoveTo(Vector3.new(-1730.544677734375, 5.683385848999023, -1280.9140625))
+                game.Players.LocalPlayer.Character.Humanoid.MoveToFinished:wait()
+                repeat wait()
+                game:GetService("VirtualInputManager"):SendKeyEvent(true,"E",false,game)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false,"E",false,game)
+                until #game:GetService("Players").LocalPlayer.PlayerGui.ShiftSystem:GetChildren() > 0
+                wait(3)
+                local busdriver = getfenv().drivertype or "Rural Bus Driver"
+                for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.ShiftSystem:GetDescendants()) do
+                if v.ClassName == "ImageButton" and v.Name == busdriver then
+                    print(v)
+                        if v.Parent ~= nil then
+                    firesignal(v.MouseButton1Click)
+                        end
+                end
+                end
+                wait(3)
+                for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.ShiftSystem:GetDescendants()) do
+                if v.ClassName == "ImageButton" and v.ImageColor3 == Color3.fromRGB(142, 68, 173) then
+                    print(v)
+                        if v.Parent ~= nil then
+                    firesignal(v.MouseButton1Click)
+                        end
+                end
+                end
+            wait(2)
+                print("check")
+                game.Players.LocalPlayer.Character.Humanoid:MoveTo(Vector3.new(-1722.3858642578125, 5.645286560058594, -1264.3126220703125))
+                game.Players.LocalPlayer.Character.Humanoid.MoveToFinished:wait()
+                repeat wait()
+                game:GetService("VirtualInputManager"):SendKeyEvent(true,"E",false,game)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false,"E",false,game)
+                until game:GetService("Players").LocalPlayer.PlayerGui.Dealership.Enabled == true or game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Part")
+                wait(2)
+                for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Dealership:GetDescendants()) do
+                if v.ClassName == "TextLabel" and v.Text == "Stuttgart Omnibus" then
+                    local plr = game.Players.LocalPlayer
+                    repeat wait()
+                    if v.Parent ~= nil then
+                        firesignal(v.Parent.MouseButton1Click)
+                        for a,b in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Dealership:GetDescendants()) do
+                            if b.ClassName == "ImageButton" and b:FindFirstChildOfClass("TextLabel").Text == "Spawn Vehicle" and b.ImageColor3 == Color3.fromRGB(41, 125, 186) then
+                           firesignal(b.MouseButton1Click)
+                            end
+                        end
+                    end
+                    until workspace.Vehicles:FindFirstChild(plr.Name) and game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Part") or game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Part")
+    
+                    wait(2)
+                end
+            end
+            end
+        elseif game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Part") and game.Players.LocalPlayer.Character.Humanoid.SeatPart ~= nil then
+    workspace.Gravity = 0
+    local plr = game.Players.LocalPlayer
+    local chr = plr.Character
+    local car = workspace.Vehicles[plr.Name]
+    car.PrimaryPart = car.Body.Mass
+    local dist = (car.WorldPivot.Position-car.WorldPivot.Position+Vector3.new(0,1000,0)).magnitude
+    local TweenService = game:GetService("TweenService")
+    local TweenInfoToUse = TweenInfo.new(0, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+    local TweenValue = Instance.new("CFrameValue")
+    TweenValue.Value = car:GetPrimaryPartCFrame()
+            
+    TweenValue.Changed:Connect(function()
+    car:PivotTo(TweenValue.Value)
+    end)
+    local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=car.WorldPivot+Vector3.new(0,1000,0)})
+    OnTween:Play()
+    OnTween.Completed:Wait()
+    local plr = game.Players.LocalPlayer
+    local chr = plr.Character
+    local pos = game:GetService("Players").LocalPlayer.PlayerGui.Part.Adornee
+    local car = workspace.Vehicles[plr.Name]
+    local dist = (car.WorldPivot.Position-pos.Position+Vector3.new(0,1000,0)).magnitude
+    local TweenService = game:GetService("TweenService")
+    local TweenInfoToUse = TweenInfo.new(dist/90, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+    
+    local TweenValue = Instance.new("CFrameValue")
+    TweenValue.Value = car:GetPrimaryPartCFrame()
+            
+    TweenValue.Changed:Connect(function()
+    car:PivotTo(TweenValue.Value)
+    end)
+    local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=pos.CFrame+Vector3.new(0,1000,0)})
+    OnTween:Play()
+    OnTween.Completed:Wait()
+    local plr = game.Players.LocalPlayer
+    local chr = plr.Character
+    local pos = game:GetService("Players").LocalPlayer.PlayerGui.Part.Adornee
+    local car = workspace.Vehicles[plr.Name]
+    local dist = (car.WorldPivot.Position-pos.Position).magnitude
+    local TweenService = game:GetService("TweenService")
+    local TweenInfoToUse = TweenInfo.new(0, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+    
+    local TweenValue = Instance.new("CFrameValue")
+    TweenValue.Value = car:GetPrimaryPartCFrame()
+            
+    TweenValue.Changed:Connect(function()
+    car:PivotTo(TweenValue.Value)
+    end)
+    local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=pos.CFrame})
+    OnTween:Play()
+    OnTween.Completed:Wait()
+    workspace.Gravity = 196
+    for i,v in pairs(workspace.BusStops:GetDescendants()) do
+        if v.Name == "SelectionBox" and v.Visible == true then
+            car:PivotTo(v.Parent.CFrame+Vector3.new(0,5,0))
+        end
+        end
+       repeat task.wait()
+       until not game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Part") or game.Players.LocalPlayer:DistanceFromCharacter(game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("Part").Adornee.Position) > 70
+    end
+    end)
+    if p == false then
+    warn("main error:",call)
+    end
+    end
+end)
+example:AddToggle("Auto Farm[Truck]", function(state)
+    getfenv().trucker = (state and true or false)
+spawn(function()
+while getfenv().trucker do
+    task.wait()
+    pcall(function()
+if workspace.Vehicles:FindFirstChild(game.Players.LocalPlayer.Name) and workspace.Vehicles[game.Players.LocalPlayer.Name].Body:FindFirstChild("Trailer") and game.Players.LocalPlayer.Character.Humanoid.SeatPart == nil then
+    local plr = game.Players.LocalPlayer
+    local car = workspace.Vehicles[plr.Name]
+    car.DriveSeat:Sit(game.Players.LocalPlayer.Character.Humanoid)
+end
+end)
+end
+end)
+spawn(function()
+    while getfenv().trucker do
+        task.wait()
+        pcall(function()
+        if game.Players.LocalPlayer.Character.Humanoid.Health < 60 and game.Players.LocalPlayer.Character.Humanoid.SeatPart == nil then
+game.Players.LocalPlayer.Character:BreakJoints()
+warn("Character had to be reset we restarting")
+        end
+    end)
+    end
+end)
+spawn(function()
+while getfenv().trucker do
+    wait()
+    pcall(function()
+if game:GetService("Players").LocalPlayer.PlayerGui.DeliverySystem.Enabled == true and game.Players.LocalPlayer.Character.Humanoid.SeatPart ~= nil then
+    _G.rat = nil
+    local num = 0
+    for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.DeliverySystem:GetDescendants()) do
+        if v.ClassName == "TextLabel" and string.find(v.Text,"XP") then
+        local Val = tonumber(v.Text:split(" ")[1])
+    if Val > num then
+    num = Val
+    print(Val)
+    _G.rat = v.Parent
+    end
+    end
+    end
+    if _G.rat ~= nil then
+    firesignal(_G.rat.MouseButton1Click)
+    end
+end
+end)
+end
+end)
+while getfenv().trucker do
+    wait()
+    pcall(function()
+        workspace.Gravity = 196
+    if  workspace.Vehicles:FindFirstChild(game.Players.LocalPlayer.Name) and not workspace.Vehicles[game.Players.LocalPlayer.Name].Body:FindFirstChild("Trailer") then
+        repeat wait()
+            workspace.Vehicles:FindFirstChild(game.Players.LocalPlayer.Name).DriveSeat:Sit(game.Players.LocalPlayer.Character.Humanoid)
+        until game.Players.LocalPlayer.Character.Humanoid.SeatPart ~= nil
+        wait()
+        workspace.Vehicles:FindFirstChild(game.Players.LocalPlayer.Name):PivotTo(CFrame.new(717.53125, 15.626567840576172, 1462.559814453125))
+        wait(1)
+        game.Players.LocalPlayer.Character.Humanoid.Sit = false
+        wait(2)
+    if game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(717.53125, 15.626567840576172, 1462.559814453125)) < 50 then
+        game.Players.LocalPlayer.Character.Humanoid:MoveTo(Vector3.new(712.7074584960938, 5.587162017822266, 1437.5025634765625))
+        game.Players.LocalPlayer.Character.Humanoid.MoveToFinished:wait()
+        game.Players.LocalPlayer.Character.Humanoid:MoveTo(Vector3.new(707.704345703125, 5.657994270324707, 1426.1021728515625))
+        game.Players.LocalPlayer.Character.Humanoid.MoveToFinished:wait()
+        repeat wait()
+        game:GetService("VirtualInputManager"):SendKeyEvent(true,"E",false,game)
+        game:GetService("VirtualInputManager"):SendKeyEvent(false,"E",false,game)
+        until #game:GetService("Players").LocalPlayer.PlayerGui.ShiftSystem:GetChildren() > 0
+        wait(1)
+        for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.ShiftSystem:GetDescendants()) do
+        if v.ClassName == "ImageButton" and v.ImageColor3 == Color3.fromRGB(39, 174, 96) then
+            print(v)
+            repeat wait()
+                if v.Parent ~= nil then
+            firesignal(v.MouseButton1Click)
+                end
+            until game:GetService("Players").LocalPlayer.PlayerGui.DeliverySystem.Enabled == true
+        end
+        end
+        repeat wait()
+        until game:GetService("Players").LocalPlayer.PlayerGui.DeliverySystem.Enabled == true
+        _G.rat = nil
+        local num = 0
+        for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.DeliverySystem:GetDescendants()) do
+            if v.ClassName == "TextLabel" and string.find(v.Text,"XP") then
+            local Val = tonumber(v.Text:split(" ")[1])
+        if Val > num then
+        num = Val
+        print(Val)
+        _G.rat = v.Parent
+        end
+        end
+        end
+        if _G.rat ~= nil then
+        firesignal(_G.rat.MouseButton1Click)
+        end
+        print("check")
+        game.Players.LocalPlayer.Character.Humanoid:MoveTo(Vector3.new(699.1327514648438, 5.645294189453125, 1407.9368896484375))
+        game.Players.LocalPlayer.Character.Humanoid.MoveToFinished:wait()
+        game.Players.LocalPlayer.Character.Humanoid:MoveTo(Vector3.new(700.1976318359375, 5.645294189453125, 1408.7381591796875))
+        game.Players.LocalPlayer.Character.Humanoid.MoveToFinished:wait()
+        repeat wait()
+        game:GetService("VirtualInputManager"):SendKeyEvent(true,"E",false,game)
+        game:GetService("VirtualInputManager"):SendKeyEvent(false,"E",false,game)
+        until game:GetService("Players").LocalPlayer.PlayerGui.Dealership.Enabled == true
+        for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Dealership:GetDescendants()) do
+        if v.ClassName == "TextLabel" and v.Text == "Stuttgart Lastkraft" then
+            repeat wait()
+            if v.Parent ~= nil then
+                firesignal(v.Parent.MouseButton1Click)
+                for a,b in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Dealership:GetDescendants()) do
+                    if b.ClassName == "ImageButton" and b.ImageColor3 == Color3.fromRGB(41, 125, 186) then
+                   firesignal(b.MouseButton1Click)
+                    end
+                end
+            end
+            until workspace.Vehicles:FindFirstChild(game.Players.LocalPlayer.Name) and workspace.Vehicles[game.Players.LocalPlayer.Name].Body:FindFirstChild("Trailer")
+        end
+    end
+        end
+    elseif workspace.Vehicles:FindFirstChild(game.Players.LocalPlayer.Name) and workspace.Vehicles[game.Players.LocalPlayer.Name].Body:FindFirstChild("Trailer") and game.Players.LocalPlayer.Character.Humanoid.SeatPart ~= nil then
+workspace.Gravity = 0
+local plr = game.Players.LocalPlayer
+local chr = plr.Character
+local car = workspace.Vehicles[plr.Name]
+car.PrimaryPart = car.Body.Mass
+local dist = (car.WorldPivot.Position-car.WorldPivot.Position+Vector3.new(0,500,0)).magnitude
+local TweenService = game:GetService("TweenService")
+local TweenInfoToUse = TweenInfo.new(dist/500, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+local TweenValue = Instance.new("CFrameValue")
+TweenValue.Value = car:GetPrimaryPartCFrame()
+        
+TweenValue.Changed:Connect(function()
+car:PivotTo(TweenValue.Value)
+end)
+local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=car.WorldPivot+Vector3.new(0,500,0)})
+OnTween:Play()
+OnTween.Completed:Wait()
+local plr = game.Players.LocalPlayer
+local chr = plr.Character
+local pos = game:GetService("Players").LocalPlayer.PlayerGui.Part.Adornee
+local car = workspace.Vehicles[plr.Name]
+local dist = (car.WorldPivot.Position-pos.Position+Vector3.new(0,500,0)).magnitude
+local TweenService = game:GetService("TweenService")
+local TweenInfoToUse = TweenInfo.new(dist/90, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+
+local TweenValue = Instance.new("CFrameValue")
+TweenValue.Value = car:GetPrimaryPartCFrame()
+        
+TweenValue.Changed:Connect(function()
+car:PivotTo(TweenValue.Value)
+end)
+local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=pos.CFrame+Vector3.new(0,500,0)})
+OnTween:Play()
+OnTween.Completed:Wait()
+local plr = game.Players.LocalPlayer
+local chr = plr.Character
+local pos = game:GetService("Players").LocalPlayer.PlayerGui.Part.Adornee
+local car = workspace.Vehicles[plr.Name]
+local dist = (car.WorldPivot.Position-pos.Position).magnitude
+local TweenService = game:GetService("TweenService")
+local TweenInfoToUse = TweenInfo.new(dist/500, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+
+local TweenValue = Instance.new("CFrameValue")
+TweenValue.Value = car:GetPrimaryPartCFrame()
+        
+TweenValue.Changed:Connect(function()
+car:PivotTo(TweenValue.Value)
+end)
+local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=pos.CFrame})
+OnTween:Play()
+OnTween.Completed:Wait()
+workspace.Gravity = 196
+for i,v in pairs(workspace.DeliveryDestinations:GetDescendants()) do
+    if v.Name == "SelectionBox" and v.Visible == true then
+        car:PivotTo(v.Parent.CFrame+Vector3.new(0,5,0))
+    end
+    end
+   repeat task.wait()
+   until not game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Part") or game.Players.LocalPlayer:DistanceFromCharacter(game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("Part").Adornee.Position) > 70
+end
+end)
+end
+end)
+local example = library:CreateWindow({
+    text = "Stuff"
+  })
+  example:AddLabel("Jump Height", function()
+  end)
+  example:AddBox("Enter Jump Height Value", function(object, focus)
+      if focus then
+     getfenv().jump = tonumber(object.Text)
+     game.Players.LocalPlayer.Character.Humanoid.JumpHeight = getfenv().jump
+      end
+  end)
+  example:AddButton("Reset Jump Height", function()
+    game.Players.LocalPlayer.Character.Humanoid.JumpHeight = 4
+  end)
+  example:AddToggle("Anti Fall Damage", function(state)
+    getfenv().ANTIFALL = (state and true or false)
+if  getfenv().ANTIFALL then
+getfenv().nofall =game:GetService("RunService").RenderStepped:Connect(function()
+        if workspace:Raycast(game.Players.LocalPlayer.Character.HumanoidRootPart.Position, Vector3.new(0, -20, 0)).Instance ~= nil and game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity.Y < -30 then 
+            game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0,0,0)
+        end
+        end)
+else
+    getfenv().nofall:Disconnect()
+end
+end)
+example:AddToggle("Anti Downed", function(state)
+getfenv().downed = (state and true or false)
+if getfenv().downed == true then
+    getfenv().antichanged1=game.Players.LocalPlayer.Character.Humanoid:GetPropertyChangedSignal("Health"):Connect(function()
+        game.Players.LocalPlayer.Character.Humanoid.Health = 100
+    end)
+else
+    print(getfenv().antichanged1)
+    getfenv().antichanged1:Disconnect()
+end
+end)
+example:AddButton("Reset Character", function(state)
+game.Players.LocalPlayer.Character:BreakJoints()
+end)
+  example:AddButton("Infinite Stamina", function()
+if getfenv().firsttime == nil then
+    getfenv().firsttime =true
+    local func 
+for i,v in pairs(getgc(true)) do
+    if type(v) == "function" and getinfo(v).name == "setStamina" then
+warn(getinfo(v).name)
+func = v
+    end
+    end
+local old= hookfunction(func,function(...)
+    local args = {...}
+    return args[1],math.huge
+end)
+end
+end)
+
+--* Example Code to show user data *-- 
